@@ -10,5 +10,10 @@ export JRE_HOME=/usr/lib/jvm/java-8-oracle/jre
 sudo apt-get -y install oracle-java8-installer
 
 # install elastic
+wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+sudo apt-get update
+sudo apt-get -y install elasticsearch
+
+# https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elk-stack-on-ubuntu-14-04  - change file
 
 # install kibana
