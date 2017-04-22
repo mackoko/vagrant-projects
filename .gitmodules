@@ -1,0 +1,3 @@
+[submodule "vagrant-puppet/puppet/modules/postgresql"]
+	path = vagrant-puppet/puppet/modules/postgresql
+	url = https://github.com/akumria/puppet-postgresql.git
