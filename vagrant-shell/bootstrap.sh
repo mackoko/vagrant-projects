@@ -19,14 +19,21 @@ sudo sed -i -e "s/\(network.host: \).*/\1localhost/" /etc/elasticsearch/elastics
 sudo sed -i "s/#network.host/network.host/g" /etc/elasticsearch/elasticsearch.yml
 
 sudo sed -i 's/#START_DAEMON/START_DAEMON/' /etc/default/elasticsearch
-sudo systemctl restart elasticsearch #    systemctl status elasticsearch
-
+sudo /bin/systemctl daemon-reload
+sudo /bin/systemctl enable elasticsearch.service
+sudo systemctl restart elasticsearch
+systemctl status elasticsearch
 
 #sudo service /etc/init.d/elasticsearch restart
 
 # https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elk-stack-on-ubuntu-14-04  - change file
 
 # install kibana
+echo "deb http://packages.elastic.co/kibana/4.4/debian stable main" | sudo tee -a /etc/apt/sources.list.d/kibana-4.4.x.list
+sudo apt-get update
+sudo apt-get -y install kibana
 
-
+# kibana on localhost
+sudo sed -i "s/# elasticsearch.url/elasticsearch.url/g" /opt/kibana/config/kibana.yml
+sudo service kibana restart
 # take a look https://github.com/stopsopa/elastic/blob/master/Vagrantfile
