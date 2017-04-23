@@ -10,9 +10,12 @@ export JRE_HOME=/usr/lib/jvm/java-8-oracle/jre
 sudo apt-get -y install oracle-java8-installer
 
 # install elastic
-wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+#wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+#sudo apt-get update
+#sudo apt-get -y install elasticsearch
 sudo apt-get update
-sudo apt-get -y install elasticsearch
+sudo wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.3.1/elasticsearch-2.3.1.deb
+sudo dpkg -i elasticsearch-2.3.1.deb
 
 #elastic on localhost
 sudo sed -i -e "s/\(network.host: \).*/\1localhost/" /etc/elasticsearch/elasticsearch.yml
