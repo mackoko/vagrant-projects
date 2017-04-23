@@ -46,7 +46,13 @@ sudo sed -i "s/#elasticsearch.url/elasticsearch.url/g" /etc/kibana/kibana.yml
 sudo sed -i -e "s/\(server.host: \).*/\1\"0.0.0.0\"/" /etc/kibana/kibana.yml
 sudo sed -i "s/#server.host/server.host/g" /etc/kibana/kibana.yml
 
+sudo /bin/systemctl enable kibana.service
 sudo systemctl restart kibana
 systemctl status kibana
 # sudo service kibana restart
 # take a look https://github.com/stopsopa/elastic/blob/master/Vagrantfile
+
+# restart working
+#sudo locale-gen pl_PL pl_PL.UTF-8
+#sudo update-rc.d elasticsearch defaults 95 10
+#sudo update-rc.d kibana defaults 96 9
