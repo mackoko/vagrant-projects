@@ -14,6 +14,19 @@ wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add 
 sudo apt-get update
 sudo apt-get -y install elasticsearch
 
+#elastic on localhost
+sudo sed -i -e "s/\(network.host: \).*/\1localhost/" /etc/elasticsearch/elasticsearch.yml
+sudo sed -i "s/#network.host/network.host/g" /etc/elasticsearch/elasticsearch.yml
+
+sudo sed -i 's/#START_DAEMON/START_DAEMON/' /etc/default/elasticsearch
+sudo systemctl restart elasticsearch #    systemctl status elasticsearch
+
+
+#sudo service /etc/init.d/elasticsearch restart
+
 # https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elk-stack-on-ubuntu-14-04  - change file
 
 # install kibana
+
+
+# take a look https://github.com/stopsopa/elastic/blob/master/Vagrantfile
