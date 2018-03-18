@@ -52,7 +52,22 @@ systemctl status kibana
 # sudo service kibana restart
 # take a look https://github.com/stopsopa/elastic/blob/master/Vagrantfile
 
-# restart working
-#sudo locale-gen pl_PL pl_PL.UTF-8
-#sudo update-rc.d elasticsearch defaults 95 10
-#sudo update-rc.d kibana defaults 96 9
+wget https://artifacts.elastic.co/downloads/logstash/logstash-5.3.1.deb
+sudo dpkg -i logstash-5.3.1.deb
+
+touch logstash-simple.conf
+echo "input { stdin {} }" >> logstash-simple.conf
+echo "output" >> logstash-simple.conf
+echo "{" >> logstash-simple.conf
+echo "elasticsearch { hosts => [\"10.0.0.10:9200\"] }" >> logstash-simple.conf
+echo "stdout { codec => rubydebug }" >> logstash-simple.conf
+echo "}" >> logstash-simple.conf
+sudo cp logstash-simple.conf /etc/logstash/conf.d/logstash.conf
+
+sudo /bin/systemctl enable logstash.service
+sudo systemctl restart logstash
+systemctl status logstash
+
+# sudo chmod 777 /usr/share/logstash/data
+# sudo chmod 777 /usr/share/logstash/data/*
+# /usr/share/logstash/bin/logstash -f logstash-simple.conf 
